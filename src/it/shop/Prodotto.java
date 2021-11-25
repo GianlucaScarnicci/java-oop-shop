@@ -20,7 +20,11 @@ public class Prodotto {
 	}
 
 	public void setNome(String nome) {
+		if(isStringNullOrEmpty(nome)) {
+			System.out.println("errore.Il nome non è adeguato.Tengo i parametri precedenti");
+		}else {
 		this.nome = nome;
+		}
 	}
 
 	public String getDescrizione() {
@@ -28,7 +32,11 @@ public class Prodotto {
 	}
 
 	public void setDescrizione(String descrizione) {
+		if(isStringNullOrEmpty(descrizione)) {
+			System.out.println("errore.La descrizione non è adeguata.Tengo i parametri precedenti");
+		}else {
 		this.descrizione = descrizione;
+		}
 	}
 
 	public double getPrezzo() {
@@ -36,7 +44,11 @@ public class Prodotto {
 	}
 
 	public void setPrezzo(double prezzo) {
+		if(isPriceOrIvaCorrect(prezzo)) {
 		this.prezzo = prezzo;
+		}else {
+			System.out.println("errore nel prezzo. Deve essere maggiore di zero.Tengo i parametri precedenti");
+		}
 	}
 
 	public int getIva() {
@@ -44,8 +56,13 @@ public class Prodotto {
 	}
 
 	public void setIva(int iva) {
+		if(isPriceOrIvaCorrect(iva)) {
 		this.iva = iva;
-	}
+		}else {
+			System.out.println("errore nell'iva. Deve essere maggiore di zero.Tengo i parametri precedenti");
+		}
+		}
+
 
 	public int getCodice() {
 		return codice;
@@ -65,6 +82,14 @@ public class Prodotto {
 	}
 	//metodo che concatena codice e nome
 	public String nomeEsteso() {
-		return codice+""+nome;
+		return codice+" "+nome;
+	}
+	//metodo che controlla se una stringa è nulla o vuota
+	private boolean isStringNullOrEmpty(String s) {
+		return s==null || s.length()==0;
+	}
+	//metodo che controlla se il prezzo o l'iva è maggiore o uguale a zero
+	private boolean isPriceOrIvaCorrect(double prezzo) {
+		return prezzo>0;
 	}
 }
